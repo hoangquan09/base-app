@@ -52,15 +52,21 @@ export async function GET() {
   });
 
   // Build response object
-  // Include both 'frame' and 'miniapp' for backward compatibility
   const response: Record<string, unknown> = {
     miniapp: miniappData,
-    frame: miniappData, // Some tools expect 'frame' instead of 'miniapp'
   };
 
-  // Only add accountAssociation if it exists
+  // Add accountAssociation if it exists
   if (accountAssociation) {
     response.accountAssociation = accountAssociation;
+  }
+
+  // Add baseBuilder if ownerAddress is set in env
+  const ownerAddress = process.env.NEXT_PUBLIC_BASE_BUILDER_ADDRESS;
+  if (ownerAddress) {
+    response.baseBuilder = {
+      ownerAddress: ownerAddress,
+    };
   }
 
   return Response.json(response);
