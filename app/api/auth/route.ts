@@ -5,19 +5,18 @@ const client = createClient();
 
 // Helper function to determine the correct domain for JWT verification
 function getUrlHost(request: NextRequest): string {
-  const protocol = request.headers.get("x-forwarded-proto") || request.nextUrl?.protocol?.replace(":", "") || "https";
   const host = request.headers.get("x-forwarded-host")
-    || request.nextUrl?.host
-    || request.headers.get("host");
+    || request.headers.get("host")
+    || request.nextUrl?.host;
 
   if (host) {
-    return `${protocol}://${host}`;
+    return host;
   }
 
   const urlValue = process.env.NEXT_PUBLIC_URL
     || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
 
-  return new URL(urlValue).origin;
+  return new URL(urlValue).host;
 }
 
 export async function GET(request: NextRequest) {
