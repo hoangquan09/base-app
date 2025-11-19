@@ -157,3 +157,12 @@ For official Base developer resources, please visit:
 - [https://docs.base.org](https://docs.base.org)  
 
 ---
+## Testing and Publishing
+
+### 1. Preview Your App
+
+Go to [base.dev/preview](https://base.dev/preview) to validate your app:
+
+1. Add your app URL to view the embeds and click the launch button to verify the app launches as expected
+2. Use the "Account association" tab to verify the association credentials were created correctly
+3. Use the "Metadata" tab to see the metadata added from the manifest and identify any missing fields
